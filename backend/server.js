@@ -26,12 +26,21 @@ const ethereumRouter = require('./routes/ethereum')
 const binanceRouter = require('./routes/binance')
 const polygonRouter = require('./routes/polygon')
 
+const networkRouter = require("./routes/network");
+const tokenRouter = require("./routes/token");
+const web3Router = require("./routes/web3");
+
 app.use('/exercises',exercisesRouter);
 app.use('/users', usersRouter)
 app.use('/mssql', mssqlRouter)
 app.use('/ethereum', ethereumRouter)
 app.use('/binance', binanceRouter)
 app.use('/polygon', polygonRouter)
+
+
+app.use("/network", networkRouter);
+app.use("/token", tokenRouter);
+app.use("/web3", web3Router);
 
 
 app.listen(port, () => {

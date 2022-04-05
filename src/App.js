@@ -1,50 +1,51 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from "./components/Main";
+import Network from "./components/Network";
+import Token from "./components/Token";
 
 
 
 function App() {
   const [token, setToken] = useState([])
 
-  useEffect( async () => {
-    var tokens = []
-    await fetch("http://localhost:8888/ethereum")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          result.forEach(item => tokens.push(item))
-        }
-      ).catch(error => console.log(error))
+  // useEffect( async () => {
+  //   var tokens = []
+  //   await fetch("http://localhost:8888/ethereum")
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         result.forEach(item => tokens.push(item))
+  //       }
+  //     ).catch(error => console.log(error))
 
-    await fetch("http://localhost:8888/binance")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          result.forEach(item => tokens.push(item))
-        }
-      ).catch(error => console.log(error))
+  //   await fetch("http://localhost:8888/binance")
+  //     .then(res => res.json())
+  //     .then(
+  //       (result) => {
+  //         result.forEach(item => tokens.push(item))
+  //       }
+  //     ).catch(error => console.log(error))
 
-    setToken(tokens)
-  }, [])
+  //   setToken(tokens)
+  // }, [])
+
+  // const navigate = useNavigate();
+
+  // const handleClick = () => {
+  //   navigate("/components/Network");
+  // };
   
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {token.map((item, index) => {
-          return <p key={index}>{item.balance + ' ' +  item.name}</p>
-        })}
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="token" element={<Token />} />
+        <Route path="network" element={<Network />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
