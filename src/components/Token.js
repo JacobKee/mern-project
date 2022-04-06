@@ -26,10 +26,10 @@ function Token() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Success:", data);
+        alert("Success:" + data.toString());
       })
       .catch((error) => {
-        console.error("Error:", error);
+        alert("Error:" + error.toString());
       });
   };
 

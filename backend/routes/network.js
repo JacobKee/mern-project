@@ -10,7 +10,8 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
   const name = req.body.name;
   const url = req.body.url;
-  const newNetwork = new Network({ name, url });
+  const token = req.body.token;
+  const newNetwork = new Network({ name, url, token });
 
   newNetwork
     .save()

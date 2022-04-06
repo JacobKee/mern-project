@@ -1,23 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Network() {
-    const [network, setNetwork] = useState();
-    const handleSubmit = async () => {
-        await fetch("http://localhost:8888/network/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(network),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log("Success:", data);
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-    };
+  const [network, setNetwork] = useState();
+  const handleSubmit = async () => {
+    await fetch("http://localhost:8888/network/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(network),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        alert("Success:" + data.toString());
+      })
+      .catch((error) => {
+        alert("Error:" + error.toString());
+      });
+  };
 
   return (
     <div style={container}>
@@ -31,13 +31,22 @@ function Network() {
             setNetwork({ ...network, name: e.target.value })
           }></input>
       </div>
-      <div>
+      <div style={row}>
         <label style={label}>Address: </label>
         <input
           style={text}
           type="text"
           onChange={(e) =>
             setNetwork({ ...network, url: e.target.value })
+          }></input>
+      </div>
+      <div style={row}>
+        <label style={label}>Token: </label>
+        <input
+          style={text}
+          type="text"
+          onChange={(e) =>
+            setNetwork({ ...network, token: e.target.value })
           }></input>
       </div>
       <div style={verticalCenter}>
